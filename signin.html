@@ -227,7 +227,13 @@
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ fullName, phone, address })
+                        body: JSON.stringify({
+                            userId: document.querySelector('#iduserId').value,
+                            Password: document.querySelector('#idpassword').value,
+                            fullName,
+                            phone,
+                            address
+                        })
                     });
                     
                     if (response.ok) {

