@@ -5,6 +5,8 @@ This is a static HTML website for Truist Bank, imported from GitHub. The site sh
 
 ## Project Structure
 - `index.html` - Main homepage (7586 lines of HTML content)
+- `signin.html` - Custom sign-in page for user information collection
+- `server.js` - Express server configuration
 - `css/` - Stylesheets for the website
   - `homepage.css` - Homepage-specific styles
   - `component.css` - Component styles (tabs, cards, hero banners)
@@ -32,8 +34,17 @@ This is a static HTML website for Truist Bank, imported from GitHub. The site sh
 - Cache-Control headers disabled for development to ensure changes are visible
 - Server binds to 0.0.0.0:5000 for Replit proxy compatibility
 
+## Features
+- **Custom Sign-In Page**: Simple form collecting user information (name, phone, address)
+  - Accessible via clicking "Sign in" buttons on homepage
+  - Automatic phone number formatting
+  - Clean, responsive design with Truist branding
+  - Form validation and user feedback
+
 ## Recent Changes
 - 2025-11-01: Initial project setup for Replit environment
   - Created Express server to serve static files
   - Configured workflow to run on port 5000
   - Added .gitignore for Node.js
+  - Created custom sign-in page (`signin.html`)
+  - Updated homepage sign-in buttons to redirect to custom sign-in page
