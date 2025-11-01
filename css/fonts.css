@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Truist Trio';
+  src: url('../fonts/TruistTrio_W_Rg_1.woff2') format('woff2'),
+    url('../fonts/TruistTrio_W_Rg_1.woff') format('woff'),
+    url('../fonts/TruistTrio_A_Rg.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'Truist Trio Lt';
+  src: url('../fonts/TruistTrio_W_Lt_1.woff2') format('woff2'),
+    url('../fonts/TruistTrio_W_Lt_1.woff') format('woff'),
+    url('TruistTrio_W_Lt.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'Truist Trio BD';
+  src: url('../fonts/TruistTrio_W_XBd_1.woff2') format('woff2'),
+    url('../fonts/TruistTrio_W_XBd_1.woff') format('woff'),
+    url('TruistTrio_W_XBd.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
