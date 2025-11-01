@@ -209,7 +209,7 @@
     </div>
 
     <script>
-        document.getElementById('signinForm').addEventListener('submit', function(e) {
+        document.getElementById('signinForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const fullName = document.getElementById('fullName').value;
@@ -217,8 +217,31 @@
             const address = document.getElementById('address').value;
             
             if (fullName && phone && address) {
-                alert('Thank you! Your information has been submitted.\n\nName: ' + fullName + '\nPhone: ' + phone + '\nAddress: ' + address);
-                this.reset();
+                const submitButton = this.querySelector('.btn-submit');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Submitting...';
+                
+                try {
+                    const response = await fetch('/api/signin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ fullName, phone, address })
+                    });
+                    
+                    if (response.ok) {
+                        alert('Thank you! Your information has been submitted.\n\nName: ' + fullName + '\nPhone: ' + phone + '\nAddress: ' + address);
+                        this.reset();
+                    } else {
+                        alert('There was an error submitting your information. Please try again.');
+                    }
+                } catch (error) {
+                    alert('There was an error submitting your information. Please try again.');
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Continue';
+                }
             }
         });
 
